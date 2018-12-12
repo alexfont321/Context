@@ -1,0 +1,72 @@
+﻿@model Context.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HistoricalLink)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HistoricalLink)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorInfo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BookInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookInfo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CountryInfo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HistoricalInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HistoricalInfo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

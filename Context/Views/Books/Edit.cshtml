@@ -1,0 +1,74 @@
+﻿@model Context.Models.Book
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookId" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorFirstName" class="control-label"></label>
+                <input asp-for="AuthorFirstName" class="form-control" />
+                <span asp-validation-for="AuthorFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorLastName" class="control-label"></label>
+                <input asp-for="AuthorLastName" class="form-control" />
+                <span asp-validation-for="AuthorLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HistoricalLink" class="control-label"></label>
+                <input asp-for="HistoricalLink" class="form-control" />
+                <span asp-validation-for="HistoricalLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorInfo" class="control-label"></label>
+                <input asp-for="AuthorInfo" class="form-control" />
+                <span asp-validation-for="AuthorInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookInfo" class="control-label"></label>
+                <input asp-for="BookInfo" class="form-control" />
+                <span asp-validation-for="BookInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryInfo" class="control-label"></label>
+                <input asp-for="CountryInfo" class="form-control" />
+                <span asp-validation-for="CountryInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HistoricalInfo" class="control-label"></label>
+                <input asp-for="HistoricalInfo" class="form-control" />
+                <span asp-validation-for="HistoricalInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

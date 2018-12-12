@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Context.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HistoricalLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HistoricalInfo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HistoricalLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HistoricalInfo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
