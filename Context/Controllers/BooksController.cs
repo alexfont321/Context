@@ -168,9 +168,17 @@ namespace Context.Controllers
                     using( HttpContent content = response.Content)
                     {
                         string result = await content.ReadAsStringAsync();
-                        var test = JObject.Parse(result);
-                        dynamic parsedResponse = JsonConvert.DeserializeObject<dynamic>(result);
-                        var tesffft = JObject.Parse(parsedResponse);
+                        var parsedResponse = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
+                        var foo = ((JObject)parsedResponse["query"]).Value<JObject>("pages").First.First;
+                        var bar = foo.ToObject<Dictionary<string, object>>();
+                        var baz = bar["extract"].ToString();
+                        //var foo = ((JObject)((JObject)parsedResponse["query"]).GetValue("pages")).First.ToObject<Dictionary<string, object>()
+                                            
+                        //var test = JObject.Parse(result);
+                        
+                        
+                        //dynamic parsedResponse = JsonConvert.DeserializeObject<dynamic>(result);
+                       // var tesffft = JObject.Parse(parsedResponse);
 
                         Console.WriteLine(parsedResponse);
 
