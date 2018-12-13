@@ -63,9 +63,11 @@ namespace Context.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookId,Title,AuthorFirstName,AuthorLastName,Country,HistoricalLink,AuthorInfo,BookInfo,CountryInfo,HistoricalInfo")] Book book)
         {
+           
+
             if (ModelState.IsValid)
             {
-                await GetRequest();
+                book.AuthorInfo = await GetRequest(WikiString($"{book.AuthorFirstName}_{book.AuthorLastName}"));
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -158,9 +160,15 @@ namespace Context.Controllers
             return _context.Books.Any(e => e.BookId == id);
         }
 
-        public async Task GetRequest()
+        public string WikiString(string s)
         {
-            string url = "https://en.wikipedia.org/w/api.php?action=query&titles=Crime_and_Punishment&prop=extracts&exintro=&explaintext=&iformat=json&format=json";
+            string url = $@"https://en.wikipedia.org/w/api.php?action=query&titles={s}&prop=extracts&exintro=&explaintext=&iformat=json&format=json";
+            return url;
+        }
+
+        public async Task<string> GetRequest(string url)
+        {
+            //string url = "https://en.wikipedia.org/w/api.php?action=query&titles=Crime_and_Punishment&prop=extracts&exintro=&explaintext=&iformat=json&format=json";
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage response = await client.GetAsync(url)) 
@@ -173,14 +181,13 @@ namespace Context.Controllers
                         var bar = foo.ToObject<Dictionary<string, object>>();
                         var baz = bar["extract"].ToString();
                         //var foo = ((JObject)((JObject)parsedResponse["query"]).GetValue("pages")).First.ToObject<Dictionary<string, object>()
-                                            
-                        //var test = JObject.Parse(result);
-                        
-                        
-                        //dynamic parsedResponse = JsonConvert.DeserializeObject<dynamic>(result);
-                       // var tesffft = JObject.Parse(parsedResponse);
 
-                        Console.WriteLine(parsedResponse);
+                        //var test = JObject.Parse(result);
+
+
+                        //dynamic parsedResponse = JsonConvert.DeserializeObject<dynamic>(result);
+                        // var tesffft = JObject.Parse(parsedResponse);
+                        return baz;
 
                     }
                 }
