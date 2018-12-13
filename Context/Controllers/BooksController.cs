@@ -72,6 +72,7 @@ namespace Context.Controllers
                 book.AuthorInfo = await GetRequest(WikiString($"{book.AuthorFirstName}_{book.AuthorLastName}"));
                 book.BookInfo = await GetRequest(WikiString($"{book.Title.Replace(" ", "_")}"));
                 book.CountryInfo = await GetRequest(WikiHistoryString($"{book.Country.Replace(" ", "_")}"));
+                book.HistoricalInfo = await GetRequest(WikiString($"{book.HistoricalLink.Substring(30)}"));
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
