@@ -63,11 +63,15 @@ namespace Context.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookId,Title,AuthorFirstName,AuthorLastName,Country,HistoricalLink,AuthorInfo,BookInfo,CountryInfo,HistoricalInfo")] Book book)
         {
-           
+
+           // ModelState.Remove("AuthorInfo");
+           // ModelState.Remove("BookInfo");
 
             if (ModelState.IsValid)
             {
                 book.AuthorInfo = await GetRequest(WikiString($"{book.AuthorFirstName}_{book.AuthorLastName}"));
+                book.BookInfo = await GetRequest(WikiString($"{book.Title.Replace(" ", "_")}"));
+                book.CountryInfo = await GetRequest(WikiHistoryString($"{book.Country.Replace(" ", "_")}"));
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -166,6 +170,12 @@ namespace Context.Controllers
             return url;
         }
 
+        public string WikiHistoryString(string s)
+        {
+            string url = $@"https://en.wikipedia.org/w/api.php?action=query&titles=History_of_{s}&prop=extracts&exintro=&explaintext=&iformat=json&format=json";
+            return url;
+        }
+
         public async Task<string> GetRequest(string url)
         {
             //string url = "https://en.wikipedia.org/w/api.php?action=query&titles=Crime_and_Punishment&prop=extracts&exintro=&explaintext=&iformat=json&format=json";
@@ -180,13 +190,6 @@ namespace Context.Controllers
                         var foo = ((JObject)parsedResponse["query"]).Value<JObject>("pages").First.First;
                         var bar = foo.ToObject<Dictionary<string, object>>();
                         var baz = bar["extract"].ToString();
-                        //var foo = ((JObject)((JObject)parsedResponse["query"]).GetValue("pages")).First.ToObject<Dictionary<string, object>()
-
-                        //var test = JObject.Parse(result);
-
-
-                        //dynamic parsedResponse = JsonConvert.DeserializeObject<dynamic>(result);
-                        // var tesffft = JObject.Parse(parsedResponse);
                         return baz;
 
                     }
