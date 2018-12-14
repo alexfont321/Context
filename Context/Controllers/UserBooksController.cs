@@ -89,6 +89,8 @@ namespace Context.Controllers
                 return NotFound();
             }
 
+
+
             var userBook = await _context.UserBooks.FindAsync(id);
             if (userBook == null)
             {
@@ -103,12 +105,22 @@ namespace Context.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserBookId,BookId,UserId")] UserBook userBook)
+        public async Task<IActionResult> Edit(int id, [Bind("UserBookId,BookId,UserId,Comments")] UserBook userBook)
         {
             if (id != userBook.UserBookId)
             {
                 return NotFound();
             }
+
+            ModelState.Remove("Book");
+            ModelState.Remove("User");
+
+            var ub = await _context.UserBooks.FindAsync(id);
+            userBook.UserId = ub.UserId;
+            userBook.BookId = ub.BookId;
+            userBook.Book = ub.Book;
+            userBook.User = ub.User;
+            
 
             if (ModelState.IsValid)
             {
