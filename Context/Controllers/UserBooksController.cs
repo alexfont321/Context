@@ -112,18 +112,15 @@ namespace Context.Controllers
                 return NotFound();
             }
 
-            ModelState.Remove("Book");
             ModelState.Remove("User");
-
-            var ub = await _context.UserBooks.FindAsync(id);
-            userBook.UserId = ub.UserId;
-            userBook.BookId = ub.BookId;
-            userBook.Book = ub.Book;
-            userBook.User = ub.User;
-            
+            ModelState.Remove("UserId");
 
             if (ModelState.IsValid)
             {
+                var ub = await _context.UserBooks.FindAsync(id);
+                userBook.UserId = ub.UserId;
+                userBook.BookId = ub.BookId;
+
                 try
                 {
                     _context.Update(userBook);
