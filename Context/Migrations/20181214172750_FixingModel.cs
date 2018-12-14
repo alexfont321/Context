@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Context.Migrations
 {
-    public partial class UserPassword : Migration
+    public partial class FixingModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -181,10 +181,11 @@ namespace Context.Migrations
                 name: "UserBooks",
                 columns: table => new
                 {
-                    UserBookId = table.Column<string>(nullable: false),
+                    UserBookId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BookId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false),
+                    Comments = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -196,17 +197,17 @@ namespace Context.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserBooks_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_UserBooks_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "FirstName", "LastName" },
-                values: new object[] { "ed59c7e7-794f-4ae6-b48d-68c542c8c566", 0, "9452df1f-f454-4215-bda2-8a5d5bf371e9", "ApplicationUser", "al@me.com", true, false, null, "al@me.com", "Alejandro", "AQAAAAEAACcQAAAAEKYYyfeo78FHT/vqZqM1RCjQmwgvd5AwUcppCHXtJYdn4Ny480OXmxywDwMmqHwKAA==", null, false, "1cb94d35-a858-454b-87ca-d221d0315def", false, "Alejandro10", "Alejandro", "Font" });
+                values: new object[] { "9a2e5a90-c0bf-4b85-aa18-8c1af1115b36", 0, "b51a4961-ac55-4423-a79d-225e3596d728", "ApplicationUser", "al@me.com", true, false, null, "al@me.com", "Alejandro", "AQAAAAEAACcQAAAAEOPk4HiPHYnB3YvYYYmvlZS+d+pt17UrPr8ufyagRWKDnijmsVtIi6itkOlqI/AmNQ==", null, false, "a1ecbf7a-aadf-4e5f-a150-01da7dd65a5f", false, "Alejandro10", "Alejandro", "Font" });
 
             migrationBuilder.InsertData(
                 table: "Books",
@@ -258,9 +259,9 @@ namespace Context.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBooks_UserId1",
+                name: "IX_UserBooks_UserId",
                 table: "UserBooks",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

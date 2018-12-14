@@ -10,17 +10,19 @@ namespace Context.Models
     {
 
         [Key]
-        public string UserBookId { get; set; }
+        public int UserBookId { get; set; }
 
         [Required]
         public int BookId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public Book Book { get; set; }
 
         public ApplicationUser User { get; set; }
+
+        public string Comments { get; set; }
 
     }
 }

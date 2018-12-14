@@ -10,17 +10,24 @@ using Context.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace Context.Controllers
 {
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
+
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
 
         static HttpClient client = new HttpClient();
 
@@ -158,6 +165,24 @@ namespace Context.Controllers
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+
+        //Method to save book as a UserBook
+        public async Task<IActionResult> SaveUserBook(int id)
+        {
+            Book bookToAdd = await _context.Books.SingleOrDefaultAsync(b => b.BookId == id);
+            var user = await GetCurrentUserAsync();
+
+            UserBook ub = new UserBook();
+            ub.BookId = bookToAdd.BookId;
+            ub.UserId = user.Id;
+            _context.Add(ub);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Books");
+
+
+
         }
 
         private bool BookExists(int id)

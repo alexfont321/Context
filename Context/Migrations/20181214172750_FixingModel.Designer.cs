@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181211213405_UserPassword")]
-    partial class UserPassword
+    [Migration("20181214172750_FixingModel")]
+    partial class FixingModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,20 +61,22 @@ namespace Context.Migrations
 
             modelBuilder.Entity("Context.Models.UserBook", b =>
                 {
-                    b.Property<string>("UserBookId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("UserBookId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BookId");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("Comments");
 
-                    b.Property<string>("UserId1");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("UserBookId");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserBooks");
                 });
@@ -264,7 +266,7 @@ namespace Context.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
 
                     b.HasData(
-                        new { Id = "ed59c7e7-794f-4ae6-b48d-68c542c8c566", AccessFailedCount = 0, ConcurrencyStamp = "9452df1f-f454-4215-bda2-8a5d5bf371e9", Email = "al@me.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "al@me.com", NormalizedUserName = "Alejandro", PasswordHash = "AQAAAAEAACcQAAAAEKYYyfeo78FHT/vqZqM1RCjQmwgvd5AwUcppCHXtJYdn4Ny480OXmxywDwMmqHwKAA==", PhoneNumberConfirmed = false, SecurityStamp = "1cb94d35-a858-454b-87ca-d221d0315def", TwoFactorEnabled = false, UserName = "Alejandro10", FirstName = "Alejandro", LastName = "Font" }
+                        new { Id = "9a2e5a90-c0bf-4b85-aa18-8c1af1115b36", AccessFailedCount = 0, ConcurrencyStamp = "b51a4961-ac55-4423-a79d-225e3596d728", Email = "al@me.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedEmail = "al@me.com", NormalizedUserName = "Alejandro", PasswordHash = "AQAAAAEAACcQAAAAEOPk4HiPHYnB3YvYYYmvlZS+d+pt17UrPr8ufyagRWKDnijmsVtIi6itkOlqI/AmNQ==", PhoneNumberConfirmed = false, SecurityStamp = "a1ecbf7a-aadf-4e5f-a150-01da7dd65a5f", TwoFactorEnabled = false, UserName = "Alejandro10", FirstName = "Alejandro", LastName = "Font" }
                     );
                 });
 
@@ -277,7 +279,8 @@ namespace Context.Migrations
 
                     b.HasOne("Context.Models.ApplicationUser", "User")
                         .WithMany("UserBooks")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
