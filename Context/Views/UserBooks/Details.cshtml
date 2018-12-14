@@ -11,16 +11,28 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.Book.Title)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserId)
+            @Html.DisplayFor(model => model.Book.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Book)
+            Author
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Book.AuthorFirstName)
+            @Html.DisplayFor(model => model.Book.AuthorFirstName) @Html.DisplayFor(model => model.Book.AuthorLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.AuthorInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.AuthorInfo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.BookInfo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.BookInfo)
         </dd>
     </dl>
 </div>

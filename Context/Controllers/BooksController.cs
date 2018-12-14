@@ -11,6 +11,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Context.Controllers
 {
@@ -169,6 +170,7 @@ namespace Context.Controllers
 
 
         //Method to save book as a UserBook
+        [Authorize]
         public async Task<IActionResult> SaveUserBook(int id)
         {
             Book bookToAdd = await _context.Books.SingleOrDefaultAsync(b => b.BookId == id);
@@ -179,7 +181,7 @@ namespace Context.Controllers
             ub.UserId = user.Id;
             _context.Add(ub);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Books");
+            return RedirectToAction("Index", "UserBooks");
 
 
 
