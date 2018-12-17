@@ -96,7 +96,7 @@ namespace Context.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookId"] = new SelectList(_context.Books, "BookId", "AuthorFirstName", userBook.BookId);
+            //ViewData["BookId"] = new SelectList(_context.Books, "BookId", "AuthorFirstName", userBook.BookId);
             return View(userBook);
         }
 
@@ -107,39 +107,49 @@ namespace Context.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UserBookId,BookId,UserId,Comments")] UserBook userBook)
         {
+
+
+            
             if (id != userBook.UserBookId)
-            {
-                return NotFound();
-            }
+                {
+                    return NotFound();
+                }
+                           
+
 
             ModelState.Remove("User");
             ModelState.Remove("UserId");
 
             if (ModelState.IsValid)
             {
-                var ub = await _context.UserBooks.FindAsync(id);
-                userBook.UserId = ub.UserId;
+            var user = await GetCurrentUserAsync();
+                userBook.UserId = user.Id;
+               var ub = await _context.UserBooks.FindAsync(id);
                 userBook.BookId = ub.BookId;
+
 
                 try
                 {
+                    _context.Entry(ub).State = EntityState.Detached;
                     _context.Update(userBook);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserBookExists(userBook.UserBookId))
-                    {
+                    if (!UserBookExists(userBook.UserBookId)
+)
+                        {
                         return NotFound();
-                    }
-                    else
-                    {
+                         }
+                        else
+                        {
                         throw;
                     }
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookId"] = new SelectList(_context.Books, "BookId", "AuthorFirstName", userBook.BookId);
+            //ViewData["BookId"] = new SelectList(_context.Books, "BookId", "AuthorFirstName", userBook.BookId);
             return View(userBook);
         }
 
