@@ -18,8 +18,22 @@
     </environment>*@
 </head>
 <body>
-    <nav >
-         @*class="navbar navbar-inverse navbar-fixed-top"*@
+
+    <nav>
+        <div class="nav-wrapper">
+            <a asp-area="" asp-controller="Books" asp-action="Index" class="brand-logo">Context</a>
+                     
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                <li><a asp-area="" asp-controller="Books" asp-action="Index">Books</a></li>
+                <li><a asp-area="" asp-controller="UserBooks" asp-action="Index">My Shelf</a></li>
+                <partial name="_LoginPartial" />
+            </ul>
+
+        </div>
+    </nav>
+    @*<nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="nav-wrapper">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,7 +52,7 @@
                 <partial name="_LoginPartial" />
             </div>
         </div>
-    </nav>
+    </nav>*@
 
     <partial name="_CookieConsentPartial" />
 
@@ -71,7 +85,7 @@
             <script src="~/js/site.min.js" asp-append-version="true"></script>
         </environment>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-/
+    /
 
     @RenderSection("Scripts", required: false)
 </body>
