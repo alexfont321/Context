@@ -4,28 +4,29 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>
+    @Html.DisplayFor(model => model.Book.Title)
+</h2>
 
 <div>
-    <h4>UserBook</h4>
+    <h4> @Html.DisplayFor(model => model.Book.AuthorFirstName) @Html.DisplayFor(model => model.Book.AuthorLastName)</h4>
     <hr />
+    <ul class="pagination">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#authorInfo">Author</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Book.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Book.Title)
-        </dd>
-        <dt>
-            Author
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Book.AuthorFirstName) @Html.DisplayFor(model => model.Book.AuthorLastName)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Book.AuthorInfo)
         </dt>
-        <dd>
+        <dd id="authorInfo">
             @Html.DisplayFor(model => model.Book.AuthorInfo)
         </dd>
         <dt>
