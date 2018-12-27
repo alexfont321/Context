@@ -175,7 +175,7 @@ namespace Context.Controllers
         // POST: UserBooks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var userBook = await _context.UserBooks.FindAsync(id);
             _context.UserBooks.Remove(userBook);
