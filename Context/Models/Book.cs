@@ -12,6 +12,7 @@ namespace Context.Models
         public int BookId { get; set; }
 
         [Required]
+        [Display(Name = "Book Title")]
         public string Title { get; set; }
 
         [Required]
