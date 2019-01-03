@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Recently Added Books</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -37,7 +37,6 @@
                 @Html.DisplayFor(modelItem => item.AuthorLastName)
             </td>   
             <td>
-                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a> |
                 <a asp-action="SaveUserBook" asp-route-id="@item.BookId">Save Book</a>
