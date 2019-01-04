@@ -6,10 +6,13 @@
 
 <h2>Recently Added Books</h2>
 
-@if (Model.User != null) { 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (Model.User != null) {
+    if (Model.User.FirstName == "Alejandro") { 
+    
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    }
 
  }
 <table class="table">
@@ -34,7 +37,16 @@
                 @Html.DisplayFor(modelItem => item.AuthorFirstName)  @Html.DisplayFor(modelItem => item.AuthorLastName)
             </td> 
             <td>
-                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a> |
+                @if (Model.User != null)
+                {
+                    if (Model.User.FirstName == "Alejandro")
+                    {
+
+                     <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a> 
+
+                    }
+
+                }
                 <a asp-action="SaveUserBook" asp-route-id="@item.BookId">Save Book</a>
             </td>
         </tr>
