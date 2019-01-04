@@ -6,7 +6,7 @@
 
 <h2>Recently Added Books</h2>
 
-@if (Model.User.FirstName == "Alejandro") { 
+@if (Model.User != null) { 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
