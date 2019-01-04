@@ -4,69 +4,58 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>
+    @Html.DisplayFor(model => model.Title)
+</h2>
+<h4>
+    @Html.DisplayFor(model => model.AuthorFirstName) @Html.DisplayFor(model => model.AuthorLastName) | @Html.DisplayFor(model => model.Country)
 
+
+</h4>
+
+<hr />
+<br />
 <div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorFirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorFirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorLastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorLastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HistoricalLink)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HistoricalLink)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorInfo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorInfo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BookInfo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BookInfo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CountryInfo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CountryInfo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HistoricalInfo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HistoricalInfo)
-        </dd>
-    </dl>
+    <ul class="collection">
+        <li class="collection-item">   
+            <h5>
+            @Html.DisplayNameFor(model => model.AuthorInfo)  
+            </h5>
+            <p class="truncate">
+                @Html.DisplayFor(model => model.AuthorInfo)
+
+            </p>
+        </li>
+        <li class="collection-item">
+            <h5>
+                @Html.DisplayNameFor(model => model.BookInfo)
+            </h5>
+            <p class="truncate">
+                @Html.DisplayFor(model => model.BookInfo)
+
+            </p>
+        </li>
+        <li class="collection-item">
+            <h5>
+                @Html.DisplayNameFor(model => model.HistoricalInfo)
+            </h5>
+            <p class="truncate">
+                @Html.DisplayFor(model => model.HistoricalInfo)
+
+            </p>
+        </li>
+        <li class="collection-item">
+            <h5>
+                @Html.DisplayNameFor(model => model.CountryInfo)
+            </h5>
+            <p class="truncate">
+                @Html.DisplayFor(model => model.CountryInfo)
+
+            </p>
+        </li>
+    </ul>
+   
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

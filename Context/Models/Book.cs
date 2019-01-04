@@ -27,12 +27,16 @@ namespace Context.Models
         [Required]
         public string HistoricalLink { get; set; }
 
+        [Display(Name = "Author Information")]
         public string AuthorInfo { get; set; }
 
+        [Display(Name = "Book Information")]
         public string BookInfo { get; set; }
 
+        [Display(Name = "Country Information")]
         public string CountryInfo { get; set; }
 
+        [Display(Name = "Historical Information")]
         public string HistoricalInfo { get; set; }
 
         public virtual ICollection<UserBook> UserBooks { get; set; }
