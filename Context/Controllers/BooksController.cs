@@ -36,7 +36,7 @@ namespace Context.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Books.ToListAsync());
+            return View(await _context.Books.OrderByDescending(b => b.BookId).Take(10).ToListAsync());
         }
 
         // GET: Books/Details/5
