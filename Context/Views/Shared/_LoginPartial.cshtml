@@ -8,7 +8,7 @@
     @*<form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Book", "Home", new { area = "" })" method="post" id="logoutForm" class="">
         <ul id="nav-mobile" class="">*@
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName!</a>
             </li>
             <li>
                <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Books", new { area = "" })" id="logoutForm" class="">Logout</a>
