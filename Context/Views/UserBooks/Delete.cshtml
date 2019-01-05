@@ -6,15 +6,15 @@
 
 <br />
 <h4>
-    Are you sure you want to delete @Html.DisplayFor(model => model.Book.Title) by @Html.DisplayFor(model => model.Book.AuthorFirstName) @Html.DisplayFor(model => model.Book.AuthorLastName)?
+    Delete @Html.DisplayFor(model => model.Book.Title) by @Html.DisplayFor(model => model.Book.AuthorFirstName) @Html.DisplayFor(model => model.Book.AuthorLastName)?
 </h4>
 <div class="center-align">
     <hr />
     <br />
     <form asp-action="Delete">
         <input type="hidden" asp-for="UserBookId" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn deep-purple accent-2" />
+        <button asp-action="Index" class="btn pink accent-4">Cancel</button>
     </form>
     <br />
 </div>
