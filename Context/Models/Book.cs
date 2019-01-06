@@ -16,15 +16,18 @@ namespace Context.Models
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
         public string AuthorFirstName { get; set; }
 
         [Required]
+        [Display(Name = "Last Name")]
         public string AuthorLastName { get; set; }
 
         [Required]
         public string Country { get; set; }
 
         [Required]
+        [Display(Name = "Link")]
         public string HistoricalLink { get; set; }
 
         [Display(Name = "Author Information")]
