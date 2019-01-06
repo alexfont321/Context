@@ -57,6 +57,7 @@ namespace Context.Controllers
             return View(userBook);
         }
 
+        
         // GET: UserBooks/Create
         public IActionResult Create()
         {
@@ -91,7 +92,7 @@ namespace Context.Controllers
 
 
 
-            var userBook = await _context.UserBooks.FindAsync(id);
+            var userBook = await _context.UserBooks.Include(ub => ub.Book).FirstOrDefaultAsync(ub => ub.UserBookId == id);
             if (userBook == null)
             {
                 return NotFound();
@@ -147,7 +148,8 @@ namespace Context.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "userBooks", new {id});
+                // return RedirectToAction(nameof(Index/));
             }
             //ViewData["BookId"] = new SelectList(_context.Books, "BookId", "AuthorFirstName", userBook.BookId);
             return View(userBook);

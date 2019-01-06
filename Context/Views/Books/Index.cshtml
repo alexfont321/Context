@@ -4,18 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Recently Added Books</h2>
+<h2>The Context Collection</h2>
 
 @if (Model.User != null) {
     if (Model.User.FirstName == "Alejandro") { 
     
-    <p>
-        <a asp-action="Create">Create New</a>
+    <p >
+        <a asp-action="Create" class="btn waves-effect">Create New</a>
     </p>
     }
 
  }
-<table class="table">
+ <hr />
+<br />
+<table class="table striped">
     <thead>
         <tr>
             <th>
@@ -31,7 +33,10 @@
 @foreach (var item in Model.Books) {
         <tr>
             <td>
-                <a asp-action="Details" asp-route-id="@item.BookId"> @Html.DisplayFor(modelItem => item.Title)</a>
+             
+                <a asp-action="Details" asp-route-id="@item.BookId" class="teal-text text-accent-4"> @Html.DisplayFor(modelItem => item.Title)</a>
+
+              
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AuthorFirstName)  @Html.DisplayFor(modelItem => item.AuthorLastName)
@@ -42,12 +47,16 @@
                     if (Model.User.FirstName == "Alejandro")
                     {
 
-                     <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a> 
+                <a asp-action="Delete" asp-route-id="@item.BookId" class="pink-text text-darken-1">
+                    <i class="material-icons">cancel</i>
+                </a> 
 
                     }
 
                 }
-                <a asp-action="SaveUserBook" asp-route-id="@item.BookId">Save Book</a>
+                     <a asp-action="SaveUserBook" asp-route-id="@item.BookId"  class="teal-text text-accent-3">
+                         <i class="material-icons">add_circle</i>
+                     </a>
             </td>
         </tr>
 }

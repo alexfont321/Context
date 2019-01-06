@@ -4,31 +4,27 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
-
-<h4>UserBook</h4>
+<h2>Comments for @Html.DisplayFor(model => model.Book.Title)</h2>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col s8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserBookId" />
             <div class="form-group">
                 <label asp-for="Comments" class="control-label"></label>
-                <input asp-for="Comments" class="form-control" />
+                <input asp-for="Comments" class="form-control"/>
                 <span asp-validation-for="Comments" class="text-danger"></span>
             </div>
          
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn" />
+                <a href="javascript:history.go(-1)" Index" class="btn pink accent-4">Cancel</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<br />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

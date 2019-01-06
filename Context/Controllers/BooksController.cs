@@ -215,7 +215,7 @@ namespace Context.Controllers
 
         public async Task<string> GetRequest(string url)
         {
-            //string url = "https://en.wikipedia.org/w/api.php?action=query&titles=Crime_and_Punishment&prop=extracts&exintro=&explaintext=&iformat=json&format=json";
+            
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage response = await client.GetAsync(url)) 
