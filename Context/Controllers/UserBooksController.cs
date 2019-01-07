@@ -57,7 +57,26 @@ namespace Context.Controllers
             return View(userBook);
         }
 
-        
+        //Get: UserBooks/ViewCountryInfo/5
+        public async Task<IActionResult> ViewCountryInfo(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userBook = await _context.UserBooks
+                .Include(u => u.Book)
+                .FirstOrDefaultAsync(m => m.UserBookId == id);
+            if (userBook == null)
+            {
+                return NotFound();
+            }
+
+            return View(userBook);
+        }
+
+
         // GET: UserBooks/Create
         public IActionResult Create()
         {

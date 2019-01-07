@@ -1,0 +1,27 @@
+﻿@model Context.Models.UserBook
+
+@{
+    ViewData["Title"] = "ViewCountryInfo";
+}
+
+<h2>
+   History of @Html.DisplayFor(model => model.Book.Country)
+</h2>
+    <hr />
+    <br />
+<div>
+    <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.Book.CountryInfo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="javascript:history.go(-1)" Index" class="teal-text text-accent-3">
+        <i class="material-icons">reply_all</i>
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model.UserBookId" class="cyan-text text-darken-4">
+        <i class="material-icons">create</i>
+
+    </a>
+</div>
