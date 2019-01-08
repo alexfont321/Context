@@ -17,4 +17,4 @@
 * C#
 * .NET
 * Materialize
-* MediawikiApi
+* MediaWiki Api
